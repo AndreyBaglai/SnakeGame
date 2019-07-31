@@ -12,6 +12,13 @@ const heightInBlocks = height / blockSize;
 
 let score = 0;
 
+const directions = {
+    37: "left",
+    38: "up",
+    39: "right",
+    40: "down"
+};
+
 const drawBorder = function() {
     ctx.fillStyle = 'Grey';
     ctx.fillRect(0, 0, width, blockSize);
@@ -43,6 +50,13 @@ const gameOver = function() {
 
 const snake = new Snake();
 snake.drawSnake();
+
+document.querySelector('body').addEventListener('keydown', event => {
+    let newDirection = directions[event.keyCode];
+    if(newDirection !== undefined) {
+        snake.setDirection(newDirection);
+    }
+});
 
 
 
