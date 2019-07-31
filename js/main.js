@@ -1,4 +1,5 @@
 import Block, {blockSize} from './Block.js';
+import Snake from './Snake.js';
 
 const canvas = document.getElementById('canvas');
 export const ctx = canvas.getContext('2d');
@@ -40,6 +41,8 @@ const gameOver = function() {
     ctx.fillText('Game over', width / 2, height / 2);
 };
 
-const myBlock = new Block(300, 300);
-myBlock.drawSquare('Green');
+const snake = new Snake();
+snake.drawSnake();
+
+
 
