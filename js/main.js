@@ -1,16 +1,4 @@
-import Block, {blockSize} from './Block.js';
-import Snake from './Snake.js';
-
-const canvas = document.getElementById('canvas');
-export const ctx = canvas.getContext('2d');
-
-const width = canvas.width;
-const height = canvas.height;
-
-const widthInBlocks = width / blockSize;
-const heightInBlocks = height / blockSize;
-
-let score = 0;
+import Snake, {width, height, ctx, blockSize, apple, score} from './Snake.js';
 
 const directions = {
     37: "left",
@@ -18,6 +6,8 @@ const directions = {
     39: "right",
     40: "down"
 };
+
+const snake = new Snake();
 
 const drawBorder = function() {
     ctx.fillStyle = 'Grey';
@@ -27,8 +17,6 @@ const drawBorder = function() {
     ctx.fillRect(width - blockSize, 0, blockSize, height);
 };
 
-drawBorder();
-
 const drawScore = function() {
     ctx.font = '25px Courier';
     ctx.fillStyle = 'Black';
@@ -37,10 +25,8 @@ const drawScore = function() {
     ctx.fillText('Счет: ' + score, blockSize, blockSize);
 };
 
-drawScore();
-
-const gameOver = function() {
-    //clearInterval(intervalId);
+export const gameOver = function() {
+    clearInterval(intervalId);
     ctx.font = '60px Courier';
     ctx.fillStyle = 'Black';
     ctx.textAlign = 'center';
@@ -48,15 +34,25 @@ const gameOver = function() {
     ctx.fillText('Game over', width / 2, height / 2);
 };
 
-const snake = new Snake();
-snake.drawSnake();
-
 document.querySelector('body').addEventListener('keydown', event => {
     let newDirection = directions[event.keyCode];
     if(newDirection !== undefined) {
         snake.setDirection(newDirection);
     }
 });
+
+const intervalId = setInterval(() => {
+    ctx.clearRect(0, 0, width, height);
+    drawScore();
+    snake.move();
+    snake.drawSnake();
+    apple.draw();
+    drawBorder();
+}, 100);
+
+
+
+
 
 
 

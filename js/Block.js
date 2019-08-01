@@ -1,6 +1,4 @@
-import {ctx} from './main.js';
-
-export const blockSize = 10;
+import {ctx, blockSize} from './Snake.js';
 
 const circle = function(x, y, radius, isFill) {
     ctx.beginPath();
@@ -13,26 +11,26 @@ const circle = function(x, y, radius, isFill) {
 };
 
 export default class Block {
-    constructor(row, col) {
-        this.row = row;
+    constructor(col, row) {
         this.col = col;
+        this.row = row;
     };
 
     drawSquare(color) {
-        let x = this.row * blockSize;
-        let y = this.col * blockSize;
+        let x = this.col * blockSize;
+        let y = this.row * blockSize;
         ctx.fillStyle = color;
         ctx.fillRect(x, y, blockSize, blockSize);
     };
 
     drawCircle(color) {
-        let centerX = this.row * blockSize + blockSize / 2;
-        let centerY = this.col * blockSize + blockSize / 2;
+        let centerX = this.col * blockSize + blockSize / 2;
+        let centerY = this.row * blockSize + blockSize / 2;
         ctx.fillStyle = color;
         circle(centerX, centerY, blockSize / 2, true);
     };
 
     equal(otherBlock) {
-        return this.row === otherBlock.row && this.col === otherBlock.col;
+        return this.col === otherBlock.col && this.row === otherBlock.row;
     };
 };

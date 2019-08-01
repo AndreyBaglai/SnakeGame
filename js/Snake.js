@@ -1,11 +1,27 @@
 import Block from './Block.js';
+import {gameOver} from './main.js';
+import Apple from './Apple.js';
+
+const canvas = document.getElementById('canvas');
+export const ctx = canvas.getContext('2d');
+
+export const blockSize = 10;
+export const width = canvas.width;
+export const height = canvas.height;
+
+export let score = 0;
+
+export const widthInBlocks = width / blockSize;
+export const heightInBlocks = height / blockSize;
+
+export const apple = new Apple();
 
 export default class Snake {
     constructor() {
         this.segments = [
-            new Block(5, 5),
-            new Block(6, 5),
-            new Block(7, 5)
+            new Block(7, 6),
+            new Block(7, 7),
+            new Block(7, 8)
         ];
 
         this.direction = 'right';
@@ -25,13 +41,13 @@ export default class Snake {
         this.direction = this.nextDirection;
 
         if(this.direction === 'right') {
-            newHead = new Block(head.row + 1, head.col);
+            newHead = new Block(head.col + 1, head.row);
         } else if(this.direction === 'left') {
-            newHead = new Block(head.row - 1, head.col);
+            newHead = new Block(head.col - 1, head.row);
         } else if(this.direction === 'down') {
-            newHead = new Block(head.row, head.col + 1);
+            newHead = new Block(head.col, head.row + 1);
         } else if(this.direction === 'up'){
-            newHead = new Block(head.row, head.col - 1);
+            newHead = new Block(head.col, head.row - 1);
         }
 
         if(this.checkCollision(newHead)) {
@@ -43,15 +59,15 @@ export default class Snake {
 
         if(newHead.equal(apple.position)) {
             score++;
-            apple.mpve();
+            apple.moveApple();
         } else {
             this.segments.pop();
         }
     };
 
     checkCollision(head) {
-        let leftCollision = (head.col === 0);
-        let topCollision = (head.row === 0);
+        let leftCollision = (head.row === 0);
+        let topCollision = (head.col === 0);
         let rightCollision = (head.col === widthInBlocks - 1);
         let bottomCollision = (head.row === heightInBlocks - 1);
 
