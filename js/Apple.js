@@ -9,12 +9,18 @@ export default class Apple {
     };
 
     draw() {
-        this.position.drawCircle('Green');
+        this.position.drawCircle('Red');
     };
 
-    moveApple() {
-        let randomCol = Math.floor(Math.random() * (widthInBlocks - 2)) + 1;
-        let randomRow = Math.floor(Math.random() * (heightInBlocks - 2)) + 1;
-        this.position = new Block(randomCol, randomRow);
+    moveApple(snakeBody) {
+        let checkBody = false;
+        while(!checkBody) {
+            let randomCol = Math.floor(Math.random() * (widthInBlocks - 2)) + 1;
+            let randomRow = Math.floor(Math.random() * (heightInBlocks - 2)) + 1;
+            this.position = new Block(randomCol, randomRow);
+            snakeBody.forEach(item => {
+                if(item.equal(this.position)) checkBody = true;
+            });
+        }
     };
 }

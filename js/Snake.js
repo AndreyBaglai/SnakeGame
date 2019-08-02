@@ -29,8 +29,14 @@ export default class Snake {
     };
 
     drawSnake() {
-        this.segments.forEach(item => {
-            item.drawSquare('Blue');
+        this.segments.forEach((item, idx) => {
+            if(idx === 0) {
+                item.drawSquare('Green');
+            } else if(idx % 2 === 0) {
+                item.drawSquare('Blue');
+            } else {
+                item.drawSquare('Yellow');
+            }
         });
     };
 

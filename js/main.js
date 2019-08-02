@@ -1,5 +1,7 @@
 import Snake, {width, height, ctx, blockSize, apple, score} from './Snake.js';
 
+let animationTime = 100;
+
 const directions = {
     37: "left",
     38: "up",
@@ -40,6 +42,10 @@ document.querySelector('body').addEventListener('keydown', event => {
         snake.setDirection(newDirection);
     }
 });
+
+const gameLoop = function() {
+
+};
 
 const intervalId = setInterval(() => {
     ctx.clearRect(0, 0, width, height);
