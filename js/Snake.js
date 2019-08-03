@@ -65,7 +65,7 @@ export default class Snake {
 
         if(newHead.equal(apple.position)) {
             score++;
-            apple.moveApple();
+            apple.moveApple(this.segments);
         } else {
             this.segments.pop();
         }
