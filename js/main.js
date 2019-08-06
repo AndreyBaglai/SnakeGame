@@ -24,7 +24,7 @@ const drawScore = function() {
     ctx.fillStyle = 'Black';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
-    ctx.fillText('Счет: ' + score, blockSize, blockSize);
+    ctx.fillText('Score: ' + score, blockSize, blockSize);
 };
 
 export const gameOver = function() {
